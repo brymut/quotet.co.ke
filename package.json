@@ -1,0 +1,28 @@
+{
+  "name": "quotet-handmade-producers",
+  "version": "0.0.1",
+  "description": "Quotet handmade producers homepage",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node server.js",
+    "build": "next build",
+    "now-build": "next build",
+    "start": "NODE_ENV=production node server.js"
+  },
+  "homepage": "https://quotet.co.ke",
+  "dependencies": {
+    "@material-ui/core": "^3.9.3",
+    "animejs": "^3.0.1",
+    "express": "^4.16.4",
+    "next": "^8.0.3",
+    "react": "^16.8.5",
+    "react-dom": "^16.8.5",
+    "react-hot-loader": "^4.8.2",
+    "react-on-screen": "^2.1.1",
+    "react-scroll-percentage": "^3.1.0",
+    "react-svg": "^8.0.2"
+  },
+  "devDependencies": {
+    "react-alice-carousel": "^1.13.3"
+  }
+}
