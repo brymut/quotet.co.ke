@@ -32,12 +32,23 @@ class Layout extends React.Component {
             href="https://fonts.googleapis.com/css?family=Josefin+Sans"
             rel="stylesheet"
           />
+          <link rel="icon" href="/static/Quotet_Handmade_Producers.png" />
+
+          <script
+            crossOrigin="anonymous"
+            src="https://polyfill.io/v3/polyfill.min.js?features=IntersectionObserver%2CIntersectionObserverEntry"
+          />
         </Head>
         <Header />
+
         <Shell onScroll={this.handleScrolling}>{this.props.children}</Shell>
 
         <style global jsx>{`
           @import "/static/alice-carousel.css";
+          html,
+          body {
+            overflow-x: scroll;
+          }
           body {
             font-family: "Josefin Sans", sans-serif;
             letter-spacing: 0.05em;

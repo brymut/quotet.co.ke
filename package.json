@@ -13,16 +13,25 @@
   "dependencies": {
     "@material-ui/core": "^3.9.3",
     "animejs": "^3.0.1",
+    "axios": "^0.18.0",
+    "carbon-components": "^10.1.0",
+    "carbon-components-react": "^7.1.0",
+    "carbon-icons": "^7.0.7",
     "express": "^4.16.4",
+    "intersection-observer": "^0.5.1",
     "next": "^8.0.3",
+    "prop-types": "^15.7.2",
     "react": "^16.8.5",
+    "react-alice-carousel": "^1.13.8",
     "react-dom": "^16.8.5",
     "react-hot-loader": "^4.8.2",
     "react-on-screen": "^2.1.1",
+    "react-responsive-modal": "^3.6.0",
     "react-scroll-percentage": "^3.1.0",
+    "react-simple-img": "^2.1.8",
+    "react-sizeme": "^2.5.2",
+    "react-spinners": "^0.5.4",
     "react-svg": "^8.0.2"
   },
-  "devDependencies": {
-    "react-alice-carousel": "^1.13.3"
-  }
+  "devDependencies": {}
 }

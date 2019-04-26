@@ -2,12 +2,19 @@ import React from "react";
 import TrackVisibility from "react-on-screen";
 import ScrollPercentage from "react-scroll-percentage";
 import anime from "animejs";
-import Slide from "@material-ui/core/Slide";
-import Paper from "@material-ui/core/Paper";
+import sizeMe from "react-sizeme";
+import PropTypes from "prop-types";
+import Contact from "./Contact";
 
 class Header extends React.Component {
   state = {
     pageLoaded: false
+  };
+  propTypes = {
+    size: PropTypes.shape({
+      width: PropTypes.number.isRequired,
+      height: PropTypes.number.isRequired
+    })
   };
   //   componentDidMount() {
   //     anime({
@@ -52,39 +59,26 @@ class Header extends React.Component {
       <ScrollPercentage onChange={(percentage, inView) => this.animate(inView)}>
         <div id="header">
           <div className="logos">
-            <a href="https://subcity.org">
+            <a href="/">
               <img
                 src="/static/Quotet_Handmade_Producers.png"
-                alt="subcity logo"
+                alt="quotet handmade producers logo"
                 className="logo1"
               />
             </a>
-            <a href="https://subcity.org">
+            <a href="/">
               <img
                 src="/static/Quotet_Handmade_Producers.png"
-                alt="subcity logo"
+                alt="quotet handmade producers logo"
                 className="logo5"
               />
             </a>
           </div>
-          <div className="head-content">
-            <div className="events">
-              <button id="events-button">Events</button>
-            </div>
-            <div className="contact">
-              <button id="contact-button">Contact</button>
-              <br />
-              <div className="contact-channels">
-                <a>Email</a>
-                <a>Instagram</a>
-                <a>Facebook</a>
-                <a>Phone</a>
-              </div>
-            </div>
-          </div>
+          <Contact width={this.props.size.width} />
+
           <style jsx>{`
             #header {
-              height: 60px;
+              height: 10%;
               width: 100%;
               // position: fixed;
               top: 0;
@@ -92,6 +86,7 @@ class Header extends React.Component {
               padding: 0;
               margin: 0;
               z-index: 1;
+              overflow-x: hidden;
             }
 
             #header h1 {
@@ -109,7 +104,7 @@ class Header extends React.Component {
               margin-top: 5%;
             }
             .logo5 {
-              margin-left: -14%;
+              margin-left: -21%;
               margin-top: -10%;
               position: fixed;
               background: white;
@@ -119,7 +114,6 @@ class Header extends React.Component {
             }
             .head-content {
               margin-top: 2.5%;
-              float: right;
               width: 50%;
               display: grid;
               grid-template-columns: 1fr 1fr;
@@ -129,79 +123,78 @@ class Header extends React.Component {
               background-color: white;
               font-size: larger;
             }
-            #events-button {
+            #events-link {
+              border: solid #c02014;
               margin-left: 25%;
               margin-right: 25%;
               width: 50%;
               padding: 0;
             }
-            #contact-button {
+            .header-link {
+              border: solid #c02014;
               margin-left: 25%;
               margin-right: 25%;
+              margin-bottom: 2%;
               width: 50%;
-              padding: 0;
+              padding-left: 10%;
+              padding-right: 10%;
+              padding-top: 1.5%;
+              padding-bottom: 1.5%;
             }
             .contact-channels {
-              display: grid;
-              grid-template-rows: auto;
+              margin-top: 5%;
             }
             .contact-channels a {
               border: solid #c02014;
               margin-top: 2%;
               padding-top: 2%;
-              padding-bottom: 2%;
+              display: grid;
+              grid-template-columns: 1fr 4fr;
+              line-height: 20px;
             }
             @media only screen and (max-width: 600px) {
               #header h1 {
                 margin-left: 40%;
               }
-              .logos {
-                display: block;
-              }
-              .logo1 {
-                margin-left: 0;
-              }
             }
             @media only screen and (min-width: 1450px) {
               .logo5 {
-                margin-left: 1%;
-                margin-top: -28%;
+                margin-left: -18%;
+                margin-top: -8%;
               }
             }
 
-            @media only screen and (max-width: 1450px) {
-              .logo1 {
-                width: 80%;
-              }
-            }
             @media only screen and (max-width: 1110px) {
-              .logo1 {
-                width: 70%;
-              }
               .logo5 {
                 margin-left: -27%;
-                margin-top: -10%;
+                margin-top: -15%;
                 width: 17%;
               }
             }
             @media only screen and (max-width: 940px) {
               .logo1 {
                 width: 60%;
+                margin-top: 0%;
+                margin-left: 10%;
+              }
+              .logo5 {
+                margin-left: -27%;
+                margin-top: -15%;
               }
             }
-            @media only screen and (max-width: 775px) {
-              .logo1 {
-                width: 50%;
+            @media only screen and (max-width: 815px) {
+              .logo5 {
+                margin-left: -27%;
+                margin-top: -20%;
               }
             }
             @media only screen and (max-width: 615px) {
               .logo1 {
-                width: 40%;
+                width: 60%;
               }
             }
             @media only screen and (max-width: 440px) {
               .logo1 {
-                width: 30%;
               }
             }
           `}</style>
@@ -210,4 +203,4 @@ class Header extends React.Component {
     );
   }
 }
-export default Header;
+export default sizeMe({ monitorWidth: true })(Header);

@@ -1,36 +1,38 @@
 const Info = props => (
   <div className="info">
-    <div>
+    <div className="text-section">
       <h1>About</h1>
-      <p>
-        Quotet was founded in 2018 whose main objective is to preserve African
-        culture while at the same time accessorizing the modern woman to give
-        her confidence. We are driven by passion and desire to put a smile on
-        the faces of others through uplifting their standards of living by
-        empowering them economically. When the founder Salome Mwenda worked for
-        the government of Kenya she travelled in many counties and met very many
-        communities with diverse culture and skills. She was implementing the
-        product development programme funded by the government of Kenya, the
-        beneficiaries were Men, Women and youth who developed high quality
-        products. After the completion of the programme she did a follow-up
-        programme and the question that arose was, “there is no market for my
-        improved products and skills” This left me thinking what I could do to
-        complete the cycle. When the found left working for the government, she
-        chose to do jewellery since she wanted to work with some of the artisans
-        she trained so as to create a space for their skills and their products.
-        Our labour and supply come from some of the artisans. Quotet is
-        empowering these Artists economically and are therefore able to support
-        their families.
-      </p>
+      <div class="text-container">
+        <p class="bx--front-line">
+          Quotet was founded in 2018 whose main objective is to preserve African
+          culture while at the same time accessorizing the modern woman to give
+          her confidence. We are driven by passion and desire to put a smile on
+          the faces of others through uplifting their standards of living by
+          empowering them economically. When the founder Salome Mwenda worked
+          for the government of Kenya she travelled in many counties and met
+          very many communities with diverse culture and skills. She was
+          implementing the product development programme funded by the
+          government of Kenya, the beneficiaries were Men, Women and youth who
+          developed high quality products. After the completion of the programme
+          she did a follow-up programme and the question that arose was, “there
+          is no market for my improved products and skills” This left me
+          thinking what I could do to complete the cycle. When the found left
+          working for the government, she chose to do jewellery since she wanted
+          to work with some of the artisans she trained so as to create a space
+          for their skills and their products. Our labour and supply come from
+          some of the artisans. Quotet is empowering these Artists economically
+          and are therefore able to support their families.
+        </p>
+      </div>
     </div>
-    <div>
+    <div className="text-section">
       <h1>Mission</h1>
       <p>
         To produce functional jewellery that suits the modern woman in every
         occasion and at the same time preserve the African culture.
       </p>
     </div>
-    <div>
+    <div className="text-section">
       <h1>Vision</h1>
       <p>
         To Marry different African cultures and modern beauty to make functional
@@ -62,16 +64,33 @@ const Info = props => (
         grid-gap: 2%;
         padding: 2.5%;
       }
+
       .info h1 {
         color: #c02014;
       }
-      .info div {
+      .text-section {
         border: solid #c02014;
         padding: 2.5%;
+        line-height: 1.5;
+      }
+      .text-container {
+        border: 0;
+      }
+
+      .bx--front-line {
+        // display: inline-block;
+        // text-overflow: ellipsis;
+        // overflow: hidden;
+        // white-space: nowrap;
       }
       .info ul {
         list-style: none;
       }
+      // .info p {
+      //   display: inline-block;
+      //   text-overflow: ellipsis;
+      //   overflow: hidden;
+      // }
 
       .info ul li::before {
         content: "\\2022";
@@ -84,7 +103,7 @@ const Info = props => (
       .info li {
         margin-top: 5%;
       }
-      @media only screen and (max-width: 600px) {
+      @media only screen and (max-width: 800px) {
         .info {
           grid-template-columns: 1fr;
           width: 90%;

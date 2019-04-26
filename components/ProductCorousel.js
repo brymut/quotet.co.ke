@@ -2,6 +2,7 @@ import React from "react";
 import AliceCarousel from "react-alice-carousel";
 import ReactSVG from "react-svg";
 import Product from "./Product";
+import axios from "axios";
 
 // const ProductCorousel = props => {
 //   const handleOnDragStart = e => e.preventDefault();
@@ -11,10 +12,11 @@ import Product from "./Product";
 //   /* {props.children} */
 // });
 class ProductCorousel extends React.Component {
-  items = [1, 2, 3, 4, 5];
-
+  //   state = {
+  //     galleryItems: this.items.map(i => <h2 key={i}>{i}</h2>)
+  //   };
   state = {
-    galleryItems: this.items.map(i => <h2 key={i}>{i}</h2>)
+    items: []
   };
 
   thumbItem = (item, i) => (
@@ -22,11 +24,31 @@ class ProductCorousel extends React.Component {
       *{" "}
     </span>
   );
+  componentWillMount() {}
+  componentDidMount() {
+    axios
+      .get(
+        `https://quotet-api.appspot.com/api/categories/${
+          this.props.category.id
+        }/items`
+      )
+      .then(res => {
+        const raw_items = [];
+        for (let item of res.data) {
+          raw_items.push(item);
+        }
+        let items = raw_items.map(item => <Product item={item} />);
+        this.setState({ items });
+      });
+  }
 
   render() {
+    const items = this.state.items;
+    const categoryName = this.props.category.name;
+
     return (
-      <div>
-        <h1 className="product-cat">Necklaces</h1>
+      <div className="product-cont">
+        <h1 className="product-cat">{categoryName}</h1>
         <div id="carousel-cont">
           <button id="prev-button" onClick={() => this.Carousel._slidePrev()}>
             <ReactSVG
@@ -36,114 +58,14 @@ class ProductCorousel extends React.Component {
           </button>
           <div id="carousel">
             <AliceCarousel
+              items={items}
               dotsDisabled={true}
               buttonsDisabled={true}
               ref={el => (this.Carousel = el)}
               mouseDragEnabled
               responsive={this.props.responsive}
               stagePadding={this.props.stagePadding}
-            >
-              <Product />
-              <Product />
-              <Product />
-              <Product />
-              <Product />
-              <Product />
-              <Product />
-              <Product />
-              <Product />
-              <Product />
-              <Product />
-              <Product />
-              <Product />
-              <Product />
-              <Product />
-
-              {/* <div className="item">
-                <img
-                  src="https://dummyimage.com/250"
-                  alt=""
-                  className="item-img"
-                />
-                <br />
-                <br />
-                <h1 className="item-name">Item 1</h1>
-              </div>
-              <div className="item">
-                <img
-                  src="https://dummyimage.com/250"
-                  alt=""
-                  className="item-img"
-                />
-                <h1 className="item-name">Item 2</h1>
-              </div>
-              <div className="item">
-                <img
-                  src="https://dummyimage.com/250"
-                  alt=""
-                  className="item-img"
-                />
-                <h1 className="item-name">Item 3</h1>
-              </div>
-              <div className="item">
-                <img
-                  src="https://dummyimage.com/250"
-                  alt=""
-                  className="item-img"
-                />
-                <h1 className="item-name">Item 4</h1>
-              </div>
-              <div className="item">
-                <img
-                  src="https://dummyimage.com/250"
-                  alt=""
-                  className="item-img"
-                />
-                <h1 className="item-name">Item 6</h1>
-              </div>
-              <div className="item">
-                <img
-                  src="https://dummyimage.com/250"
-                  alt=""
-                  className="item-img"
-                />
-                <h1 className="item-name">Item 5</h1>
-              </div>
-              <div className="item">
-                <img
-                  src="https://dummyimage.com/250"
-                  alt=""
-                  className="item-img"
-                />
-                <h1 className="item-name">Item 7</h1>
-              </div>
-              <div className="item">
-                <img
-                  src="https://dummyimage.com/250"
-                  alt=""
-                  className="item-img"
-                />
-                <h1 className="item-name">Item 8</h1>
-              </div>
-              <div className="item">
-                <img
-                  src="https://dummyimage.com/250"
-                  alt=""
-                  className="item-img"
-                />
-                <h1 className="item-name">Item 9</h1>
-              </div> */}
-              {/* <img
-              src="/img4"
-              onDragStart={handleOnDragStart}
-              className="yours-custom-class"
             />
-            <img
-              src="/img5"
-              onDragStart={handleOnDragStart}
-              className="yours-custom-class"
-            /> */}
-            </AliceCarousel>
           </div>
           <button id="next-button" onClick={() => this.Carousel._slideNext()}>
             <ReactSVG
@@ -154,6 +76,8 @@ class ProductCorousel extends React.Component {
         </div>
 
         <style global jsx>{`
+          .product-cont {
+          }
           .product-cat {
             color: #c02014;
             margin-left: 2.5%;
@@ -192,7 +116,12 @@ class ProductCorousel extends React.Component {
           }
           @media only screen and (max-width: 600px) {
             #carousel-cont {
+              width: 80%;
+              margin-left: 10%;
               height: 315px;
+            }
+            #prev-button {
+              left: -8%;
             }
           }
           @media only screen and (min-width: 1250px) {
@@ -218,6 +147,9 @@ class ProductCorousel extends React.Component {
           @media only screen and (max-width: 615px) {
           }
           @media only screen and (max-width: 440px) {
+            #prev-button {
+              left: -10%;
+            }
           }
         `}</style>
       </div>
