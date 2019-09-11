@@ -1,18 +1,6 @@
 import React from "react";
-import ReactSVG from "react-svg";
-import axios from "axios";
 
 class DesktopContact extends React.Component {
-  //   state = {
-  //     galleryItems: this.items.map(i => <h2 key={i}>{i}</h2>)
-  //   };
-  state = {
-    items: [],
-    email: ""
-  };
-
-  componentDidMount() {}
-
   render() {
     const contacts = this.props.contacts;
     const email = this.props.email;
@@ -25,55 +13,10 @@ class DesktopContact extends React.Component {
           </a>
         </div>
         <div className="contact">
-          <a className="header-link">Contact</a>
+          <a className="header-link" href="/contact">
+            Contact
+          </a>
           <br />
-          <div className="contact-channels">
-            {email ? (
-              <a href={`mailto:${email}`}>
-                <ReactSVG
-                  src="/static/outline-email-24px.svg"
-                  svgStyle={{
-                    fill: "#c02014",
-                    width: "30%",
-                    marginLeft: "15%"
-                  }}
-                />
-                {email}
-              </a>
-            ) : (
-              <p>Loading...</p>
-            )}
-
-            {contacts && contacts.length > 0 ? (
-              contacts.map(contact => (
-                <a href={contact.link}>
-                  <ReactSVG
-                    src="/static/instagram.svg"
-                    svgStyle={{
-                      fill: "#c02014",
-                      width: "30%",
-                      marginLeft: "15%"
-                    }}
-                  />
-                  {contact.contact_type}
-                </a>
-              ))
-            ) : (
-              <p>Loading...</p>
-            )}
-
-            {/* <a href="mailto:salomemuthoni26@gmail.com">
-              <ReactSVG
-                src="/static/outline-email-24px.svg"
-                svgStyle={{
-                  fill: "#c02014",
-                  width: "30%",
-                  marginLeft: "15%"
-                }}
-              />
-              salomemuthoni26@gmail.com
-            </a> */}
-          </div>
         </div>
         <style jsx>{`
           .head-contact {
@@ -105,6 +48,7 @@ class DesktopContact extends React.Component {
             padding-right: 10%;
             padding-top: 1.5%;
             padding-bottom: 1.5%;
+            text-decoration: none;
           }
           a:link {
             color: black;
@@ -164,4 +108,5 @@ class DesktopContact extends React.Component {
     );
   }
 }
+
 export default DesktopContact;

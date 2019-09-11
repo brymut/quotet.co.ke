@@ -1,5 +1,7 @@
 import Layout from "../components/Layout.js";
 import Event from "../components/Event";
+import { Spinner } from "../components/Spinner";
+
 import axios from "axios";
 
 export default class Index extends React.Component {
@@ -17,6 +19,7 @@ export default class Index extends React.Component {
       this.setState({ events });
     });
   }
+
   render() {
     const events = this.state.events;
     return (
@@ -25,7 +28,7 @@ export default class Index extends React.Component {
           {events && events.length > 0 ? (
             events.map(event => <Event info={event} />)
           ) : (
-            <p>Loading...</p>
+            <Spinner></Spinner>
           )}
         </section>
         <style global jsx>{`

@@ -4,7 +4,7 @@ const Shell = props => (
     <style global jsx>{`
       .shell {
         margin-top: 0%;
-        overflow: hidden;
+        margin-bottom: 10%;
       }
       @media only screen and (max-width: 600px) {
         .item {

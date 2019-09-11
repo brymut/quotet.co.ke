@@ -1,39 +1,5 @@
-import DesktopContact from "./DesktopContact";
-import Modal from "react-responsive-modal";
-
 class MobileContact extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      open: false,
-      item: {}
-    };
-  }
-
-  state = {
-    open: false,
-    item: {}
-  };
-
-  onOpenModal = () => {
-    this.setState({ open: true });
-  };
-
-  onCloseModal = () => {
-    this.setState({ open: false });
-  };
-  componentDidMount() {
-    // axios
-    //   .get(`https://quotet-api.appspot.com/api/items/${this.props.item.id}/`)
-    //   .then(res => {
-    //     const item = res.data;
-    //     this.setState({ item });
-    //   });
-  }
-
   render() {
-    const { item, isLoading } = this.state;
-
     return (
       <div className="head-contact">
         <div className="events">
@@ -41,10 +7,11 @@ class MobileContact extends React.Component {
             Events
           </a>
         </div>
-        <div className="contact" onClick={this.onOpenModal}>
-          <a className="header-link">Contact</a>
+        <div className="contact">
+          <a className="header-link" href="/contact">
+            Contact
+          </a>
         </div>
-        <Modal open={this.state.open} onClose={this.onCloseModal} center />
         <style jsx>{`
           .head-contact {
             height: 150px;
@@ -71,6 +38,32 @@ class MobileContact extends React.Component {
             padding-right: 10%;
             padding-top: 1.5%;
             padding-bottom: 1.5%;
+            text-decoration: none;
+          }
+          a:link {
+            color: black;
+          }
+
+          a:visited {
+            color: black;
+            text-decoration: none;
+          }
+
+          a:focus {
+            border-bottom: 1px solid;
+            background: #c02014;
+            color: white;
+          }
+
+          a:hover {
+            border-bottom: 1px solid;
+            background: #c02014;
+            color: white;
+          }
+
+          a:active {
+            background: white;
+            color: red;
           }
           @media only screen and (max-width: 370px) {
             .head-contact {

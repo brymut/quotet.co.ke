@@ -1,8 +1,6 @@
 import Modal from "react-responsive-modal";
-import { SimpleImg } from "react-simple-img";
 import { Spinner } from "./Spinner";
 import axios from "axios";
-import { FileUploaderSkeleton } from "carbon-components-react";
 
 class Product extends React.Component {
   constructor(props) {
@@ -13,6 +11,7 @@ class Product extends React.Component {
       item: {}
     };
   }
+
   // handleImageErrored() {
   //   this.setState({ imageStatus: "failed to load" });
   // }
@@ -30,10 +29,11 @@ class Product extends React.Component {
   onCloseModal = () => {
     this.setState({ open: false });
   };
+
   handleImageLoaded() {
-    console.log("done");
     this.setState({ isLoading: false });
   }
+
   componentDidMount() {
     axios
       .get(`https://quotet-api.appspot.com/api/items/${this.props.item.id}/`)
@@ -44,7 +44,8 @@ class Product extends React.Component {
   }
 
   render() {
-    const { item, isLoading } = this.state;
+    const isLoading = this.state;
+    const item = this.props.item;
 
     return (
       <div>
@@ -57,32 +58,40 @@ class Product extends React.Component {
             // onError={this.handleImageErrored.bind(this)}
           />
           {isLoading === true ? <Spinner /> : <br />}
-          <br />
           <h1 className="item-name">{item.name}</h1>
         </div>
         <Modal open={this.state.open} onClose={this.onCloseModal} center>
           <div>
-            <h1>{item.name}</h1>
+            <h1 className="item-name">{item.name}</h1>
             <p>{item.description}</p>
-            <SimpleImg
-              placeholder="red"
-              className="item-img"
+            <img
               src={item.image}
+              alt=""
+              className="item-img-modal"
+              onLoad={this.handleImageLoaded.bind(this)}
+              // onError={this.handleImageErrored.bind(this)}
             />
             {/* <img src={this.props.item.image} alt="" className="item-img" /> */}
           </div>
         </Modal>
         <style global jsx>{`
           .item {
-            border: solid #c02014;
+            //border: solid #c02014;
             padding: 2.5%;
             margin: 2.5%;
             max-width: 400px;
           }
+          @media (hover: hover) {
+            .item:hover {
+              border: solid #c02014;
+              margin: -0.1px;
+            }
+          }
+
           .item-name {
             width: 75%;
-            text-align: center;
-            margin: auto;
+            color: #c02014;
+            font-size: large;
           }
           .item-desc {
             width: 75%;
@@ -93,8 +102,10 @@ class Product extends React.Component {
             display: block;
             margin-left: auto;
             margin-right: auto;
-            width: 90%;
             max-height: 200px;
+          }
+          .item-img-modal {
+            max-height: 300px;
           }
           @media only screen and (max-width: 600px) {
             .item {
