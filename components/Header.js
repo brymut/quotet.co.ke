@@ -1,11 +1,16 @@
+import Contact from "./Contact";
+import { Spinner } from "./Spinner";
+
 import React from "react";
 import sizeMe from "react-sizeme";
 import PropTypes from "prop-types";
-import Contact from "./Contact";
+import ReactSVG from "react-svg";
+import axios from "axios";
 
 class Header extends React.Component {
   state = {
-    pageLoaded: false
+    pageLoaded: false,
+    contacts: []
   };
   propTypes = {
     size: PropTypes.shape({
@@ -14,7 +19,18 @@ class Header extends React.Component {
     })
   };
 
+  componentDidMount() {
+    axios.get(`https://quotet-api.appspot.com/api/contacts/`).then(res => {
+      const contacts = [];
+      for (let contact of res.data) {
+        contacts.push(contact);
+      }
+      this.setState({ contacts });
+    });
+  }
+
   render() {
+    const contacts = this.state.contacts;
     return (
       <div id="header">
         <div className="logos">
@@ -25,6 +41,101 @@ class Header extends React.Component {
               className="logo1"
             />
           </a>
+          <div id="contact-home">
+            {contacts && contacts.length > 0 ? (
+              contacts.map(contact =>
+                contact.contact_type.toLowerCase() === "email" ? (
+                  <a
+                    href={`mailto:${contact.link
+                      .replace("http://", "")
+                      .toLowerCase()}`}
+                  >
+                    <ReactSVG
+                      src="/static/outline-email-24px.svg"
+                      svgStyle={{
+                        fill: "#c02014",
+                        width: "30px"
+                      }}
+                      className="contact-email"
+                    />
+                  </a>
+                ) : contact.contact_type.toLowerCase() === "instagram" ? (
+                  <a href={contact.link}>
+                    <ReactSVG
+                      src="/static/instagram.svg"
+                      svgStyle={{
+                        fill: "#c02014",
+                        width: "22px"
+                      }}
+                    />
+                  </a>
+                ) : contact.contact_type.toLowerCase() === "facebook" ? (
+                  <a href={contact.link}>
+                    <ReactSVG
+                      src="/static/facebook.svg"
+                      svgStyle={{
+                        fill: "#c02014",
+                        width: "22px"
+                      }}
+                    />
+                  </a>
+                ) : (
+                  <li className="contact">
+                    <a href={contact.link}>{contact.contact_type}</a>
+                  </li>
+                )
+              )
+            ) : (
+              <Spinner></Spinner>
+            )}
+          </div>
+
+          {/* <div id="contact-home">
+            <a>
+              <ReactSVG
+                src="/static/facebook.svg"
+                svgStyle={{
+                  fill: "#c02014",
+                  width: "25px",
+                  marginTop: "10px",
+                  marginLeft: "2px;"
+                }}
+              />
+            </a>
+            <a>
+              <ReactSVG
+                src="/static/instagram.svg"
+                svgStyle={{
+                  fill: "#c02014",
+                  width: "25px",
+                  marginTop: "10px",
+                  marginLeft: "2px;"
+                }}
+              />
+            </a>
+            <a>
+              <ReactSVG
+                src="/static/facebook.svg"
+                svgStyle={{
+                  fill: "#c02014",
+                  width: "25px",
+                  marginTop: "10px",
+                  marginLeft: "2px;"
+                }}
+              />
+            </a>
+            <a>
+              <ReactSVG
+                src="/static/facebook.svg"
+                svgStyle={{
+                  fill: "#c02014",
+                  width: "25px",
+                  marginTop: "10px",
+                  marginLeft: "2px;"
+                }}
+              />
+            </a>
+          </div> */}
         </div>
         <Contact width={this.props.size.width} />
 
@@ -74,6 +185,17 @@ class Header extends React.Component {
             border: solid #c02014;
             background-color: white;
             font-size: larger;
+          }
+          #contact-home {
+            display: grid;
+            grid-template-areas: "a a a a";
+            grid-gap: 10px;
+            grid-auto-columns: 45px;
+            margin-left: 5%;
+            margin-top: 2%;
+          }
+          .contact-email {
+            margin-left: -5px;
           }
           #events-link {
             border: solid #c02014;
