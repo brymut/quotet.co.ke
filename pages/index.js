@@ -19,9 +19,6 @@ export default class Index extends React.Component {
     },
     600: {
       items: 3
-    },
-    1000: {
-      items: 4
     }
   };
   stagePadding = {

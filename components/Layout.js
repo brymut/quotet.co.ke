@@ -1,13 +1,17 @@
 import Shell from "./Shell";
 import Header from "./Header";
 import Head from "next/head";
-import ReactGA from "react-ga";
+import { initGA, logPageView } from "../utils/analytics";
 
-//export default
 class Layout extends React.Component {
   componentDidMount() {
-    ReactGA.initialize("UA-144271320-11");
+    if (!window.GA_INITIALIZED) {
+      initGA();
+      window.GA_INITIALIZED = true;
+    }
+    logPageView();
   }
+
   render() {
     return (
       <div>
@@ -15,6 +19,10 @@ class Layout extends React.Component {
           <title>Quotet</title>
 
           <meta charSet="utf-8" />
+          <meta
+            name="Description"
+            content="Quotet Handmade Producers website"
+          ></meta>
           <meta
             name="viewport"
             content="initial-scale=1.0, width=device-width"
