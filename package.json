@@ -19,7 +19,7 @@
     "carbon-icons": "^7.0.7",
     "express": "^4.16.4",
     "intersection-observer": "^0.5.1",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "next": "^8.0.3",
     "prop-types": "^15.7.2",
     "react": "^16.8.5",
